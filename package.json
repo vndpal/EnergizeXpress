@@ -1,0 +1,19 @@
+{
+  "name": "EnergizeXpress",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/VNDPAL/EnergizeXpress.git",
+  "author": "Vinod Pal <undervinod@gmail.com>",
+  "license": "MIT",
+  "private": "true",
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "start": "concurrently \"yarn workspace server start\" \"yarn workspace client start\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.1"
+  }
+}
