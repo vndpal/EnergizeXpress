@@ -8,6 +8,6 @@ Steps to get started:
 Step 1: Fork this repo  
 Step 2: Crate a feature branch  
 Step 3: Navigate to root of the project and run Yarn  
-Step 4: Run command "yarn workspace start"  
+Step 4: Run command "npm start"  
 
 Todo: Write a short description about this project

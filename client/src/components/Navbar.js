@@ -1,36 +1,32 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
+import { NavLink } from 'react-router-dom';
 
 const Navbar = props => {
   return (
     <>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">EnergizeExpress</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <a className="navbar-brand" href="/">EnergizeExpress</a>
+        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav ml-auto">
+            <li className="nav-item active">
+              <NavLink className="nav-link" to='/'>Home <span className="sr-only">(current)</span></NavLink>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
+            <li className="nav-item active">
+              <NavLink className="nav-link" to="/aboutus">About Us <span className="sr-only">(current)</span></NavLink>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-                Dropdown
-              </a>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
+            <li className="nav-item active">
+              <NavLink className="nav-link" to="/contactus">Contact us <span className="sr-only">(current)</span></NavLink>
             </li>
-            <li class="nav-item">
-              <a class="nav-link disabled">Disabled</a>
+            <li className="nav-item active">
+              <NavLink className="nav-link" to="/weight">Log weight <span className="sr-only">(current)</span></NavLink>
+            </li>
+            <li className="nav-item active">
+              <NavLink className="nav-link" to="/workout">Log workout <span className="sr-only">(current)</span></NavLink>
             </li>
           </ul>
         </div>
