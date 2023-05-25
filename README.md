@@ -4,9 +4,10 @@ EnergizeXpress is a fitness tracking web application aims to provide users with 
 
 This repo is an monorepo which means you can get all the depedancies at one place.
 
-Steps to get started:/nStep 1: Fork this repo \n
-Step 2: Crate a feature branch \n
-Step 3: Navigate to root of the project and run Yarn '\n
-Step 4: Run command "yarn workspace start" \n
+Steps to get started:  
+Step 1: Fork this repo  
+Step 2: Crate a feature branch  
+Step 3: Navigate to root of the project and run Yarn  
+Step 4: Run command "yarn workspace start"  
 
 Todo: Write a short description about this project
