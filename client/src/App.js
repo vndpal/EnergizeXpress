@@ -7,6 +7,7 @@ import { Route,Routes } from 'react-router-dom';
 import ContactUs from './components/ContactUs';
 import WeightLog from './components/WeightLog';
 import WorkouttLog from './components/WorkoutLog';
+import Register from './components/Register';
 
 function App() {
   useEffect(()=>{
@@ -19,6 +20,7 @@ function App() {
       <Navbar />
       <Routes>
       <Route path='/' Component={Home} />
+      <Route path='/register' Component={Register} />
       <Route path='/aboutus' Component={AboutUs} />
       <Route path='/contactus' Component={ContactUs} />
       <Route path='/weight' Component={WeightLog} />

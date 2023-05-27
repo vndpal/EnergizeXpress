@@ -1,6 +1,6 @@
 import signup from "../images/signup.jpg";
 
-const Home = (props) => {
+const Register = (props) => {
   return (
     <>
       <div className="cardClass">
@@ -59,4 +59,4 @@ const Home = (props) => {
   );
 };
 
-export default Home;
+export default Register;
