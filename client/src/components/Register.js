@@ -6,7 +6,7 @@ const Register = (props) => {
 
   const navigate = useNavigate();
   const [user, setUser] = useState({
-    firstName:"",lname:"",mobile:0,emailId:"",password:"",cpassword:""
+    firstName:"",lname:"",mobile:"",emailId:"",password:"",cpassword:""
   });
 
   let id,value;
