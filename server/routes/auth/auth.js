@@ -7,6 +7,7 @@ const Joi = require('@hapi/joi');
 const registerSchema = Joi.object({
     firstName: Joi.string().min(4).required(),
     lastName:Joi.string().min(0).max(200),
+    mobile:Joi.number().min(0).max(99999999999),
     emailId:Joi.string().min(8).max(200).required(),
     password:Joi.string().min(8).max(200).required()
 });
@@ -32,6 +33,7 @@ router.post('/register',async (req,res)=>{
         firstName:req.body.firstName,
         lastName:req.body.lastName,
         emailId:req.body.emailId,
+        mobile:req.body.mobile,
         password:hashedPassword
     });
 
