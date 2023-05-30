@@ -48,7 +48,7 @@ router.post('/register',async (req,res)=>{
         else
         {
             const saveUser = await user.save();
-            res.status(200).send("user created");
+            res.status(200).send({message:"user created"});
         }
 
     }

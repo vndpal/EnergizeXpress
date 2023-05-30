@@ -14,8 +14,30 @@ const Register = (props) => {
     initialValues:initialValues,
     validationSchema:resigterSchema,
     onSubmit: async (values,action)=>{
-     postData1(values);
-      action.resetForm();
+      const   {firstName,lastName,mobile,emailId,password} = values;
+      const res = await fetch("/api/users/register",{
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+          firstName,lastName,mobile,emailId,password
+        })
+      })
+  
+      const response = await res.json();
+      console.log(response);
+
+      if(res.status === 200)
+      {
+        navigate('/');
+        action.resetForm();
+      }
+      if(res.status === 500)
+      {
+          alert('what the func0');
+      }
+      
     },
   })
   const navigate = useNavigate();
@@ -39,9 +61,7 @@ const Register = (props) => {
       headers:{
         "Content-Type":"application/json"
       },
-      body:JSON.stringify({
-     values
-      })
+      body:JSON.stringify(values)
     })
 
     const response = await res.json();
