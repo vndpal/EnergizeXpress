@@ -1,9 +1,23 @@
 import { useState } from "react";
 import signup from "../images/signup.jpg";
 import {useNavigate} from "react-router-dom";
+import {useFormik } from 'formik';
+import {resigterSchema} from '../schemas';
+
+const initialValues = {
+  firstName:"",lname:"",mobile:"",emailId:"",password:"",cpassword:""
+}
 
 const Register = (props) => {
 
+ const {values,errors,touched,handleBlur,handleChange,handleSubmit} = useFormik({
+    initialValues:initialValues,
+    validationSchema:resigterSchema,
+    onSubmit: async (values,action)=>{
+     postData1(values);
+      action.resetForm();
+    },
+  })
   const navigate = useNavigate();
   const [user, setUser] = useState({
     firstName:"",lname:"",mobile:"",emailId:"",password:"",cpassword:""
@@ -14,6 +28,28 @@ const Register = (props) => {
     id = e.target.id;
     value = e.target.value;
     setUser({...user,[id]:value})
+  }
+
+  const postData1 = async (values)=>{
+    
+
+
+    const res = await fetch("/api/users/register",{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify({
+     values
+      })
+    })
+
+    const response = await res.json();
+
+    if(response.status === 200)
+    {
+      navigate('/home')
+    }
   }
 
   const postData = async (e)=>{
@@ -46,19 +82,22 @@ const Register = (props) => {
           <div className="form-container">
           <h2 className="card-title">Register</h2>
           <div>
-            <form className="card-title">
+            <form className="card-title" onSubmit={handleSubmit}>
             <div className="form-group">
                 <label htmlFor="firstName">First Name</label>
                 <input
                   type="text"
                   className="form-control"
                   id="firstName"
+                  name="firstName"
                   aria-describedby="emailHelp"
                   placeholder="Enter First Name"
                   autoComplete="off"
-                  value={user.firstName}
-                  onChange={handleInputChange}
+                  value={values.firstName}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+                { errors.firstName && touched.firstName?  <p>{errors.firstName}</p> : null}
               </div>
               <div className="form-group">
                 <label htmlFor="name">Last Name</label>
@@ -66,11 +105,13 @@ const Register = (props) => {
                   type="text"
                   className="form-control"
                   id="lname"
+                  name="lname"
                   aria-describedby="emailHelp"
                   placeholder="Enter Last Name"
                   autoComplete="off"
-                  value={user.lname}
-                  onChange={handleInputChange}
+                  value={values.lname}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
               </div>
               <div className="form-group">
@@ -79,11 +120,13 @@ const Register = (props) => {
                   type="number"
                   className="form-control"
                   id="mobile"
+                  name="mobile"
                   aria-describedby="emailHelp"
                   placeholder="Enter Mobile"
                   autoComplete="off"
-                  value={user.mobile}
-                  onChange={handleInputChange}
+                  value={values.mobile}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
                 <small id="emailHelp" className="form-text text-muted">
                   We'll never share your mobile with anyone else.
@@ -95,11 +138,13 @@ const Register = (props) => {
                   type="email"
                   className="form-control"
                   id="emailId"
+                  name="emailId"
                   aria-describedby="emailHelp"
                   placeholder="Enter email"
                   autoComplete="off"
-                  value={user.emailId}
-                  onChange={handleInputChange}
+                  value={values.emailId}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
                 <small id="emailHelp" className="form-text text-muted">
                   We'll never share your email with anyone else.
@@ -111,10 +156,12 @@ const Register = (props) => {
                   type="password"
                   className="form-control"
                   id="password"
+                  name="password"
                   placeholder="Password"
                   autoComplete="off"
-                  value={user.password}
-                  onChange={handleInputChange}
+                  value={values.password}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
                 </div>
                  <div className="form-group">
@@ -123,16 +170,18 @@ const Register = (props) => {
                   type="password"
                   className="form-control"
                   id="cpassword"
+                  name="cpassword"
                   placeholder="Confirm Password"
                   autoComplete="off"
-                  value={user.cpassword}
-                  onChange={handleInputChange}
+                  value={values.cpassword}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
               </div>
               <button
                 type="submit"
                 className="btn btn-primary card-submit-button"
-                onClick={postData}
+                // onClick={postData}
               >
                 Register
               </button>
