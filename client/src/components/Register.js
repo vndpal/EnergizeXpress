@@ -1,4 +1,3 @@
-import { useState } from "react";
 import signup from "../images/signup.jpg";
 import {useNavigate} from "react-router-dom";
 import {useFormik } from 'formik';
@@ -9,6 +8,8 @@ const initialValues = {
 }
 
 const Register = (props) => {
+
+  const navigate = useNavigate();
 
  const {values,errors,touched,handleBlur,handleChange,handleSubmit} = useFormik({
     initialValues:initialValues,
@@ -24,9 +25,6 @@ const Register = (props) => {
           firstName,lastName,mobile,emailId,password
         })
       })
-  
-      const response = await res.json();
-      console.log(response);
 
       if(res.status === 200)
       {
@@ -35,66 +33,12 @@ const Register = (props) => {
       }
       if(res.status === 500)
       {
-          alert('what the func0');
+          //ToDo Add some message here
       }
       
     },
   })
-  const navigate = useNavigate();
-  const [user, setUser] = useState({
-    firstName:"",lname:"",mobile:"",emailId:"",password:"",cpassword:""
-  });
-
-  let id,value;
-  const handleInputChange = (e)=>{
-    id = e.target.id;
-    value = e.target.value;
-    setUser({...user,[id]:value})
-  }
-
-  const postData1 = async (values)=>{
-    
-
-
-    const res = await fetch("/api/users/register",{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json"
-      },
-      body:JSON.stringify(values)
-    })
-
-    const response = await res.json();
-
-    if(response.status === 200)
-    {
-      navigate('/home')
-    }
-  }
-
-  const postData = async (e)=>{
-    e.preventDefault();
-
-    const {firstName,lastName,mobile,emailId,password} = user;
-
-    const res = await fetch("/api/users/register",{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json"
-      },
-      body:JSON.stringify({
-        firstName,lastName,mobile,emailId,password
-      })
-    })
-
-    const response = await res.json();
-
-    if(response.status === 200)
-    {
-      navigate('/home')
-    }
-  }
-
+  
   return (
     <>
       <div className="cardClass">
@@ -201,7 +145,6 @@ const Register = (props) => {
               <button
                 type="submit"
                 className="btn btn-primary card-submit-button"
-                // onClick={postData}
               >
                 Register
               </button>
