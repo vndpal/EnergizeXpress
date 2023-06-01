@@ -17,7 +17,10 @@ function App() {
   },[])
   return (
     <>
-      <Navbar />
+    <div className='menubar'>
+    <Navbar />
+    </div>
+     
       <Routes>
       <Route path='/' Component={Home} />
       <Route path='/register' Component={Register} />

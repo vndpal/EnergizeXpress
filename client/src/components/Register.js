@@ -10,10 +10,11 @@ const initialValues = {
 const Register = (props) => {
 
   const navigate = useNavigate();
-
+  
  const {values,errors,touched,handleBlur,handleChange,handleSubmit} = useFormik({
     initialValues:initialValues,
     validationSchema:resigterSchema,
+  
     onSubmit: async (values,action)=>{
       const   {firstName,lastName,mobile,emailId,password} = values;
       const res = await fetch("/api/users/register",{
@@ -61,7 +62,7 @@ const Register = (props) => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-                { errors.firstName && touched.firstName?  <p>{errors.firstName}</p> : null}
+                { errors.firstName && touched.firstName?  <p class="error-message">{errors.firstName}</p> : null}
               </div>
               <div className="form-group">
                 <label htmlFor="name">Last Name</label>
@@ -77,21 +78,23 @@ const Register = (props) => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
+                { errors.lname && touched.lname?  <p class="error-message">{errors.lname}</p> : null}
               </div>
               <div className="form-group">
                 <label htmlFor="mobile">Mobile</label>
                 <input
-                  type="number"
+                  type="text"
                   className="form-control"
                   id="mobile"
                   name="mobile"
                   aria-describedby="emailHelp"
-                  placeholder="Enter Mobile"
+                  placeholder="Enter Mobile e.g. +12-1234567890"
                   autoComplete="off"
                   value={values.mobile}
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
+                { errors.mobile && touched.mobile?  <p class="error-message">{errors.mobile}</p> : null}
                 <small id="emailHelp" className="form-text text-muted">
                   We'll never share your mobile with anyone else.
                 </small>
@@ -110,6 +113,7 @@ const Register = (props) => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
+                { errors.emailId && touched.emailId?  <p class="error-message">{errors.emailId}</p> : null}
                 <small id="emailHelp" className="form-text text-muted">
                   We'll never share your email with anyone else.
                 </small>
@@ -127,6 +131,7 @@ const Register = (props) => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
+                { errors.password && touched.password?  <p class="error-message">{errors.password}</p> : null}
                 </div>
                  <div className="form-group">
                 <label htmlFor="cpassword">Confirm Password</label>
@@ -141,6 +146,7 @@ const Register = (props) => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
+                { errors.cpassword && touched.cpassword?  <p class="error-message">{errors.cpassword}</p> : null}
               </div>
               <button
                 type="submit"
