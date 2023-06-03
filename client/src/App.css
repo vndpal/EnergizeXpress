@@ -50,6 +50,9 @@
 
   .form-container{
     flex: 1;
+    display: flex;
+  flex-direction: column;
+  justify-content: center;
   }
 
 
@@ -64,4 +67,12 @@
     top:0;
     left: 0;
     width: 100%;
+  }
+
+  .form-group {
+    margin-bottom: 1rem; /* Add margin between form groups */
+  }
+  
+  .form-control {
+    padding: 0.5rem; /* Add padding to form controls */
   }
