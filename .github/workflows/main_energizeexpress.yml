@@ -26,7 +26,7 @@ jobs:
 
       - name: Create application archive
         run: |
-          7z a -r -x!node_modules -x!.git app.zip *
+          7z a -r app.zip * -xr!node_modules -xr!.git
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
