@@ -18,11 +18,13 @@ jobs:
       with:
         node-version: '18'
         
+    - name: Install dependencies
+      run: yarn install --frozen-lockfile
+      
     - name: Build and Test
       run: |
-        npm ci
-        npm run build
-        npm run test
+        yarn build
+        yarn test
         
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
