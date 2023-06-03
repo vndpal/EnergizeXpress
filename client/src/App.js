@@ -8,6 +8,7 @@ import ContactUs from './components/ContactUs';
 import WeightLog from './components/WeightLog';
 import WorkouttLog from './components/WorkoutLog';
 import Register from './components/Register';
+import WeeklyWorkoutProgram from './components/WeeklyWorkoutProgram';
 
 function App() {
   useEffect(()=>{
@@ -28,6 +29,7 @@ function App() {
       <Route path='/contactus' Component={ContactUs} />
       <Route path='/weight' Component={WeightLog} />
       <Route path='/workout' Component={WorkouttLog} />
+      <Route path='/program' Component={WeeklyWorkoutProgram} />
       </Routes>
     </>
   );

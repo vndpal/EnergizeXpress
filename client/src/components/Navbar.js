@@ -29,8 +29,11 @@ const Navbar = props => {
       <li className="nav-item active">
         <NavLink className="nav-link" to="/weight">Log weight</NavLink>
       </li>
-      <li className="nav-item active">
+      {/* <li className="nav-item active">
         <NavLink className="nav-link" to="/workout">Log workout</NavLink>
+      </li> */}
+      <li className="nav-item active">
+        <NavLink className="nav-link" to="/program">workout program</NavLink>
       </li>
     </ul>
   </div>
