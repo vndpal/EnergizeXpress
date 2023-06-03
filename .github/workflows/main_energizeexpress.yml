@@ -25,7 +25,8 @@ jobs:
           npm run test --if-present
 
       - name: Create application archive
-        run: Compress-Archive -Path . -DestinationPath app.zip -ExcludePath 'node_modules', '.git'
+        run: |
+          7z a -r -x!node_modules -x!.git app.zip *
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
@@ -57,4 +58,4 @@ jobs:
           app-name: 'energizeExpress'
           slot-name: 'production'
           publish-profile: ${{ secrets.AzureAppService_PublishProfile_93337195ee064535b8dd8a69dbad561c }}
-          package: ./app
+          package: ./server
