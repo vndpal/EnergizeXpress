@@ -29,5 +29,5 @@ jobs:
       with:
         app-name: your-web-app-name
         slot-name: production  # Optional: Specify the deployment slot name if using slots
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_2ecb213fd5aa4addaca5b31c0a1bff6a }}
         package: .
