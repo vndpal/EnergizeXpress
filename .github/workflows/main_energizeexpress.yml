@@ -1,6 +1,3 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
 name: Build and deploy Node.js app to Azure Web App - energizeExpress
 
 on:
@@ -27,17 +24,21 @@ jobs:
           npm run build --if-present
           npm run test --if-present
       
+      - name: Create application archive
+        run: |
+          zip -r app.zip . -x node_modules/\* .git/\*
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: .
+          path: app.zip
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: 'Production'
+      name: 'production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
@@ -46,11 +47,15 @@ jobs:
         with:
           name: node-app
 
+      - name: Extract application archive
+        run: |
+          unzip -q node-app/app.zip -d app
+
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
           app-name: 'energizeExpress'
-          slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AC377F9BFB2F4BB2B4E959A9031B9FC6 }}
+          slot-name: 'production'
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_93337195ee064535b8dd8a69dbad561c }}
           package: ./server
