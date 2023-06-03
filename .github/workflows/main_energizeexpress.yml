@@ -53,4 +53,4 @@ jobs:
           app-name: 'energizeExpress'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AC377F9BFB2F4BB2B4E959A9031B9FC6 }}
-          package: .
+          package: ./server
