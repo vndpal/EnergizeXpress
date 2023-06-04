@@ -27,10 +27,6 @@ function WeeklyWorkoutProgram() {
     setSelectedDay(event.target.value);
   };
 
-  const handleWorkoutNameChange = (event) => {
-    setWorkoutName(event.target.value);
-  };
-
   const handleWorkoutChange = (event) => {
     setWorkout(event.target.value);
   };
@@ -53,37 +49,36 @@ function WeeklyWorkoutProgram() {
     setReps(newReps);
   };
 
-  const handleSaveWorkout = () => {
-    if (
-      selectedDay &&
-      workoutName &&
-      workout &&
-      sets &&
-      weights.length > 0 &&
-      reps.length > 0
-    ) {
-      const program = [...workoutProgram];
-      const existingDay = program.find((day) => day.day === selectedDay);
+  const handleAddWorkout = () => {
+    if (selectedDay && workout && sets && weights.length > 0 && reps.length > 0) {
+      setWorkoutProgram((prevProgram) => {
+        const updatedProgram = [...prevProgram];
+        const existingDay = updatedProgram.find((day) => day.day === selectedDay);
 
-      if (existingDay) {
-        existingDay.workouts.push({
-          name: workoutName,
-          workout,
-          sets,
-          weights,
-          reps,
-        });
-      } else {
-        program.push({
-          day: selectedDay,
-          workouts: [
-            { name: workoutName, workout, sets, weights, reps },
-          ],
-        });
-      }
+        if (existingDay) {
+          existingDay.workouts.push({
+            workout,
+            sets,
+            weights,
+            reps,
+          });
+        } else {
+          updatedProgram.push({
+            day: selectedDay,
+            workouts: [
+              {
+                workout,
+                sets,
+                weights,
+                reps,
+              },
+            ],
+          });
+        }
 
-      setWorkoutProgram(program);
-      setWorkoutName('');
+        return updatedProgram;
+      });
+
       setWorkout('');
       setSets('');
       setWeights([]);
@@ -91,10 +86,14 @@ function WeeklyWorkoutProgram() {
     }
   };
 
-  const handleWorkoutSubmit = (event) => {
-    event.preventDefault();
-    // Implement the desired logic when submitting the workout form
-    // For example, you can handle form validation or perform an API request
+  const handleSaveWorkout = () => {
+    if (workoutName && workoutProgram.length > 0) {
+      localStorage.setItem(workoutName, JSON.stringify(workoutProgram));
+
+      // Clear the form fields and workout program after saving
+      setWorkoutName('');
+      setWorkoutProgram([]);
+    }
   };
 
   const renderSetInputs = () => {
@@ -138,7 +137,7 @@ function WeeklyWorkoutProgram() {
   return (
     <div className="container mt-4">
       <h2>Weekly Workout Program</h2>
-      <form onSubmit={handleWorkoutSubmit}>
+      <form>
         <div className="mb-3">
           <label htmlFor="daySelect" className="form-label">
             Select a Day:
@@ -158,18 +157,6 @@ function WeeklyWorkoutProgram() {
             <option value="Saturday">Saturday</option>
             <option value="Sunday">Sunday</option>
           </select>
-        </div>
-        <div className="mb-3">
-          <label htmlFor="workoutNameInput" className="form-label">
-            Workout Name:
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="workoutNameInput"
-            value={workoutName}
-            onChange={handleWorkoutNameChange}
-          />
         </div>
         {selectedDay && (
           <div>
@@ -201,9 +188,9 @@ function WeeklyWorkoutProgram() {
             <button
               type="button"
               className="btn btn-primary mt-3"
-              onClick={handleSaveWorkout}
+              onClick={handleAddWorkout}
             >
-              Save Workout
+              Add Workout
             </button>
           </div>
         )}
@@ -215,7 +202,6 @@ function WeeklyWorkoutProgram() {
             <thead>
               <tr>
                 <th>Day</th>
-                <th>Workout Name</th>
                 <th>Workout</th>
                 <th>Sets</th>
                 <th>Weights</th>
@@ -226,11 +212,6 @@ function WeeklyWorkoutProgram() {
               {workoutProgram.map((day, index) => (
                 <tr key={index}>
                   <td>{day.day}</td>
-                  <td>
-                    {day.workouts.map((workout, workoutIndex) => (
-                      <div key={workoutIndex}>{workout.name}</div>
-                    ))}
-                  </td>
                   <td>
                     {day.workouts.map((workout, workoutIndex) => (
                       <div key={workoutIndex}>{workout.workout}</div>
@@ -255,6 +236,25 @@ function WeeklyWorkoutProgram() {
               ))}
             </tbody>
           </table>
+          <div className="mb-3">
+            <label htmlFor="workoutNameInput" className="form-label">
+              Workout Name:
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="workoutNameInput"
+              value={workoutName}
+              onChange={(e) => setWorkoutName(e.target.value)}
+            />
+          </div>
+          <button
+            type="button"
+            className="btn btn-primary mt-3"
+            onClick={handleSaveWorkout}
+          >
+            Save Workout
+          </button>
         </div>
       )}
     </div>
