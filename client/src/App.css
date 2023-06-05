@@ -76,3 +76,7 @@
   .form-control {
     padding: 0.5rem; /* Add padding to form controls */
   }
+
+  .container{
+    margin-top:100px;
+  }

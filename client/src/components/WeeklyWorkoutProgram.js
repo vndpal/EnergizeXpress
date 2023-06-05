@@ -135,7 +135,7 @@ function WeeklyWorkoutProgram() {
   };
 
   return (
-    <div className="container mt-4">
+    <div className="container">
       <h2>Weekly Workout Program</h2>
       <form>
         <div className="mb-3">
