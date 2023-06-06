@@ -44,7 +44,7 @@ function WeightLog() {
   });
 
   return (
-    <div className="container mt-5">
+    <div className="container">
       <h2 className="mb-4">Weight Log</h2>
       <form onSubmit={handleWeightSubmit}>
         <div className="mb-3">
