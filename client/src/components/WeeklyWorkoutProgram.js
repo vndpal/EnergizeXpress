@@ -56,12 +56,17 @@ function WeeklyWorkoutProgram() {
         const existingDay = updatedProgram.find((day) => day.day === selectedDay);
 
         if (existingDay) {
-          existingDay.workouts.push({
-            workout,
-            sets,
-            weights,
-            reps,
-          });
+          const isExistingRecord = existingDay.workouts.some(x=>x.workout===workout && x.sets===sets && x.weights===weights && x.reps===reps);
+          if(!isExistingRecord)
+          {
+            existingDay.workouts.push({
+              workout,
+              sets,
+              weights,
+              reps,
+            });
+          }
+          
         } else {
           updatedProgram.push({
             day: selectedDay,
