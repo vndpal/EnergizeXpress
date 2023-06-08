@@ -229,12 +229,27 @@ function WeeklyWorkoutProgram() {
                   </td>
                   <td>
                     {day.workouts.map((workout, workoutIndex) => (
-                      <div key={workoutIndex}>{workout.weights.join(', ')}</div>
+                      // <div key={workoutIndex}>{workout.weights.join(', ')}</div>
+                      <div key={workoutIndex}>
+    {workout.weights.map((weight, weightIndex) => (
+      <React.Fragment key={weightIndex}>
+        {weight}
+        <br />
+      </React.Fragment>
+    ))}
+  </div>
                     ))}
                   </td>
                   <td>
                     {day.workouts.map((workout, workoutIndex) => (
-                      <div key={workoutIndex}>{workout.reps.join(', ')}</div>
+                      <div key={workoutIndex}>
+                      {workout.reps.map((rep, repIndex) => (
+                        <React.Fragment key={repIndex}>
+                          {rep}
+                          <br />
+                        </React.Fragment>
+                      ))}
+                    </div>
                     ))}
                   </td>
                 </tr>

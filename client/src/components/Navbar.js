@@ -33,7 +33,7 @@ const Navbar = props => {
         <NavLink className="nav-link" to="/workout">Log workout</NavLink>
       </li> */}
       <li className="nav-item active">
-        <NavLink className="nav-link" to="/program">workout program</NavLink>
+        <NavLink className="nav-link" to="/program">Workout Program</NavLink>
       </li>
     </ul>
   </div>
