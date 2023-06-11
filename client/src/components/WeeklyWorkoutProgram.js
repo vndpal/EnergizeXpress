@@ -229,7 +229,6 @@ function WeeklyWorkoutProgram() {
                   </td>
                   <td>
                     {day.workouts.map((workout, workoutIndex) => (
-                      // <div key={workoutIndex}>{workout.weights.join(', ')}</div>
                       <div key={workoutIndex}>
     {workout.weights.map((weight, weightIndex) => (
       <React.Fragment key={weightIndex}>
