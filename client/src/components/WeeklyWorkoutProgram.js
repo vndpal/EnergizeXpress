@@ -8,6 +8,7 @@ function WeeklyWorkoutProgram() {
   const [sets, setSets] = useState('');
   const [weights, setWeights] = useState([]);
   const [reps, setReps] = useState([]);
+  const [weightRepMap,setWeightRepMap] = useState([]);
   const [workoutProgram, setWorkoutProgram] = useState([]);
 
   useEffect(() => {
@@ -41,12 +42,30 @@ function WeeklyWorkoutProgram() {
     const newWeights = [...weights];
     newWeights[index] = event.target.value;
     setWeights(newWeights);
+
+    const newWeightRepMap = [...weightRepMap];
+    if(newWeightRepMap[index]){
+      newWeightRepMap[index]["weight"] = event.target.value;
+    }
+    else{
+      newWeightRepMap[index] = {weight:event.target.value};
+    }
+    setWeightRepMap(newWeightRepMap);
   };
 
   const handleRepsChange = (event, index) => {
     const newReps = [...reps];
     newReps[index] = event.target.value;
     setReps(newReps);
+
+    const newWeightRepMap = [...weightRepMap];
+    if(newWeightRepMap[index]){
+        newWeightRepMap[index]["rep"] = event.target.value;
+    }
+    else{
+      newWeightRepMap[index] = {weight:event.target.value};
+    }
+    setWeightRepMap(newWeightRepMap);
   };
 
   const handleAddWorkout = () => {
@@ -64,6 +83,7 @@ function WeeklyWorkoutProgram() {
               sets,
               weights,
               reps,
+              weightRepMap
             });
           }
           
@@ -76,6 +96,7 @@ function WeeklyWorkoutProgram() {
                 sets,
                 weights,
                 reps,
+                weightRepMap
               },
             ],
           });
