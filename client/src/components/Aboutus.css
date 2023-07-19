@@ -2,12 +2,22 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    margin: 2rem;
     height: 100vh;
+    background-image: linear-gradient(
+      115deg,
+     rgba(1, 1, 1, 0.731),
+      rgba(1, 1, 1, 0.728)
+ ),
+    url('../../public/backgroundwall.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
   }
   
   .about-content {
     width: 50%;
+    color:white;
+    box-shadow: 10rem;
   }
   
   .about-content h2 {

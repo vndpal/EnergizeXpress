@@ -1,0 +1,17 @@
+.navbar-custom {
+  background-color: linear-gradient(
+    115deg,
+    rgba(0.6, 1, 1, 0.4),
+    rgba(0.6, 1, 1, 0.5)
+  );
+}
+
+.navbar-brand,
+.nav-link,
+.nav-item .active {
+  color: white;
+}
+
+.nav-item :hover {
+  background-color: rgba(0, 0, 0, 0.605);
+}
