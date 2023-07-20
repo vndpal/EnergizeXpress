@@ -1,0 +1,46 @@
+.weight-log-container {
+  padding-top: 100px;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  background-image: linear-gradient(
+      115deg,
+      rgba(1, 1, 1, 0.731),
+      rgba(1, 1, 1, 0.728)
+    ),
+    url("../../public/backgroundwall.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.weight-log-title {
+  color: white;
+  max-width: 50%;
+}
+.wl-container {
+  width: 50%;
+}
+
+.wl-container input:focus {
+  color: white;
+}
+
+.wl-container input,
+.wl-container textarea {
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  color: white;
+  background-image: linear-gradient(
+      115deg,
+      rgba(1, 1, 1, 0.731),
+      rgba(1, 1, 1, 0.728)
+    ),
+    url("../../public/backgroundwall.jpg");
+  box-shadow: 0px 2px 4px rgb(254, 252, 252);
+}
+
+.wl-table {
+  color: white;
+}

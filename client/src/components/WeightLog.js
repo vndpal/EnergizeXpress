@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import "./WeightLog.css";
 
 function WeightLog() {
   const [weight, setWeight] = useState("");
@@ -44,69 +45,80 @@ function WeightLog() {
   });
 
   return (
-    <div className="container">
-      <h2 className="mb-4">Weight Log</h2>
-      <form onSubmit={handleWeightSubmit}>
-        <div className="mb-3">
-          <label htmlFor="weightInput" className="form-label">
-            Enter Weight:
-          </label>
-          <input
-            type="number"
-            className="form-control"
-            id="weightInput"
-            value={weight}
-            onChange={handleWeightChange}
-          />
+    <div className="weight-log-container">
+      <div className="wl-container">
+        <h2 className="weight-log-title">Weight Log</h2>
+        <form onSubmit={handleWeightSubmit}>
+          <div className="mb-3">
+            <label htmlFor="weightInput" className="form-label">
+              Enter Weight:
+            </label>
+            <input
+              type="number"
+              className="form-control"
+              id="weightInput"
+              value={weight}
+              onChange={handleWeightChange}
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="datePicker" className="form-label">
+              Select Date:
+            </label>
+            <br />
+            <DatePicker
+              id="datePicker"
+              className="form-control"
+              selected={selectedDate}
+              onChange={handleDateChange}
+              dateFormat="MM/dd/yyyy"
+              maxDate={new Date()}
+              onChangeRaw={(e) => e.preventDefault()}
+            />
+          </div>
+          <button type="submit" className="btn btn-primary">
+            Log Weight
+          </button>
+        </form>
+        <div
+          className="mt-4"
+          style={{ maxHeight: "300px", overflowY: "scroll" }}
+        >
+          {sortedWeights && sortedWeights.length > 0 ? (
+            <table className="wl-table table">
+              <thead>
+                <tr>
+                  <th onClick={() => handleSort("date")}>
+                    Date{" "}
+                    {sortColumn === "date" && sortOrder === "asc" ? (
+                      <i className="bi bi-caret-up-fill"></i>
+                    ) : (
+                      <i className="bi bi-caret-down-fill"></i>
+                    )}
+                  </th>
+                  <th onClick={() => handleSort("weight")}>
+                    Weight (lbs){" "}
+                    {sortColumn === "weight" && sortOrder === "asc" ? (
+                      <i className="bi bi-caret-up-fill"></i>
+                    ) : (
+                      <i className="bi bi-caret-down-fill"></i>
+                    )}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {sortedWeights.map((w, index) => (
+                  <tr key={index}>
+                    <td>{w.date.toLocaleDateString()}</td>
+                    <td>{w.weight}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            ""
+          )}
         </div>
-        <div className="mb-3">
-          <label htmlFor="datePicker" className="form-label">
-            Select Date:
-          </label>
-          <br />
-          <DatePicker
-            id="datePicker"
-            className="form-control"
-            selected={selectedDate}
-            onChange={handleDateChange}
-            dateFormat="MM/dd/yyyy"
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Log Weight
-        </button>
-      </form>
-      <div className="mt-4" style={{ maxHeight: "300px", overflowY: "scroll" }}>
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              <th onClick={() => handleSort("date")}>
-                Date{" "}
-                {sortColumn === "date" && sortOrder === "asc" ? (
-                  <i className="bi bi-caret-up-fill"></i>
-                ) : (
-                  <i className="bi bi-caret-down-fill"></i>
-                )}
-              </th>
-              <th onClick={() => handleSort("weight")}>
-                Weight (lbs){" "}
-                {sortColumn === "weight" && sortOrder === "asc" ? (
-                  <i className="bi bi-caret-up-fill"></i>
-                ) : (
-                  <i className="bi bi-caret-down-fill"></i>
-                )}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {sortedWeights.map((w, index) => (
-              <tr key={index}>
-                <td>{w.date.toLocaleDateString()}</td>
-                <td>{w.weight}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
       </div>
     </div>
   );
