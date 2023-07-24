@@ -1,19 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.css';
+import React, { useState, useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.css";
+import "./WeeklyWorkoutProgram.css";
 
 function WeeklyWorkoutProgram() {
-  const [selectedDay, setSelectedDay] = useState('');
-  const [workoutName, setWorkoutName] = useState('');
-  const [workout, setWorkout] = useState('');
-  const [sets, setSets] = useState('');
+  const [selectedDay, setSelectedDay] = useState("");
+  const [workoutName, setWorkoutName] = useState("");
+  const [workout, setWorkout] = useState("");
+  const [sets, setSets] = useState("");
   const [weights, setWeights] = useState([]);
   const [reps, setReps] = useState([]);
-  const [weightRepMap,setWeightRepMap] = useState([]);
+  const [weightRepMap, setWeightRepMap] = useState([]);
   const [workoutProgram, setWorkoutProgram] = useState([]);
 
   useEffect(() => {
     // Load the workout program from local storage on component mount
-    const savedProgram = localStorage.getItem('weeklyWorkoutProgram');
+    const savedProgram = localStorage.getItem("weeklyWorkoutProgram");
     if (savedProgram) {
       setWorkoutProgram(JSON.parse(savedProgram));
     }
@@ -21,7 +22,10 @@ function WeeklyWorkoutProgram() {
 
   useEffect(() => {
     // Save the workout program to local storage whenever it changes
-    localStorage.setItem('weeklyWorkoutProgram', JSON.stringify(workoutProgram));
+    localStorage.setItem(
+      "weeklyWorkoutProgram",
+      JSON.stringify(workoutProgram)
+    );
   }, [workoutProgram]);
 
   const handleDayChange = (event) => {
@@ -33,9 +37,13 @@ function WeeklyWorkoutProgram() {
   };
 
   const handleSetsChange = (event) => {
-    setSets(event.target.value);
-    setWeights([]);
-    setReps([]);
+    if (event.target.value > 5) {
+      alert("You can not have more that 5 sets of a workout");
+    } else {
+      setSets(event.target.value);
+      setWeights([]);
+      setReps([]);
+    }
   };
 
   const handleWeightChange = (event, index) => {
@@ -44,11 +52,10 @@ function WeeklyWorkoutProgram() {
     setWeights(newWeights);
 
     const newWeightRepMap = [...weightRepMap];
-    if(newWeightRepMap[index]){
+    if (newWeightRepMap[index]) {
       newWeightRepMap[index]["weight"] = event.target.value;
-    }
-    else{
-      newWeightRepMap[index] = {weight:event.target.value};
+    } else {
+      newWeightRepMap[index] = { weight: event.target.value };
     }
     setWeightRepMap(newWeightRepMap);
   };
@@ -59,34 +66,45 @@ function WeeklyWorkoutProgram() {
     setReps(newReps);
 
     const newWeightRepMap = [...weightRepMap];
-    if(newWeightRepMap[index]){
-        newWeightRepMap[index]["rep"] = event.target.value;
-    }
-    else{
-      newWeightRepMap[index] = {weight:event.target.value};
+    if (newWeightRepMap[index]) {
+      newWeightRepMap[index]["rep"] = event.target.value;
+    } else {
+      newWeightRepMap[index] = { weight: event.target.value };
     }
     setWeightRepMap(newWeightRepMap);
   };
 
   const handleAddWorkout = () => {
-    if (selectedDay && workout && sets && weights.length > 0 && reps.length > 0) {
+    if (
+      selectedDay &&
+      workout &&
+      sets &&
+      weights.length > 0 &&
+      reps.length > 0
+    ) {
       setWorkoutProgram((prevProgram) => {
         const updatedProgram = [...prevProgram];
-        const existingDay = updatedProgram.find((day) => day.day === selectedDay);
+        const existingDay = updatedProgram.find(
+          (day) => day.day === selectedDay
+        );
 
         if (existingDay) {
-          const isExistingRecord = existingDay.workouts.some(x=>x.workout===workout && x.sets===sets && x.weights===weights && x.reps===reps);
-          if(!isExistingRecord)
-          {
+          const isExistingRecord = existingDay.workouts.some(
+            (x) =>
+              x.workout === workout &&
+              x.sets === sets &&
+              x.weights === weights &&
+              x.reps === reps
+          );
+          if (!isExistingRecord) {
             existingDay.workouts.push({
               workout,
               sets,
               weights,
               reps,
-              weightRepMap
+              weightRepMap,
             });
           }
-          
         } else {
           updatedProgram.push({
             day: selectedDay,
@@ -96,7 +114,7 @@ function WeeklyWorkoutProgram() {
                 sets,
                 weights,
                 reps,
-                weightRepMap
+                weightRepMap,
               },
             ],
           });
@@ -105,8 +123,8 @@ function WeeklyWorkoutProgram() {
         return updatedProgram;
       });
 
-      setWorkout('');
-      setSets('');
+      setWorkout("");
+      setSets("");
       setWeights([]);
       setReps([]);
     }
@@ -117,7 +135,7 @@ function WeeklyWorkoutProgram() {
       localStorage.setItem(workoutName, JSON.stringify(workoutProgram));
 
       // Clear the form fields and workout program after saving
-      setWorkoutName('');
+      setWorkoutName("");
       setWorkoutProgram([]);
     }
   };
@@ -137,7 +155,7 @@ function WeeklyWorkoutProgram() {
               type="number"
               className="form-control"
               id={`weightInput${i}`}
-              value={weights[i] || ''}
+              value={weights[i] || ""}
               onChange={(e) => handleWeightChange(e, i)}
             />
           </div>
@@ -149,7 +167,7 @@ function WeeklyWorkoutProgram() {
               type="number"
               className="form-control"
               id={`repsInput${i}`}
-              value={reps[i] || ''}
+              value={reps[i] || ""}
               onChange={(e) => handleRepsChange(e, i)}
             />
           </div>
@@ -161,142 +179,147 @@ function WeeklyWorkoutProgram() {
   };
 
   return (
-    <div className="container">
-      <h2>Weekly Workout Program</h2>
-      <form>
-        <div className="mb-3">
-          <label htmlFor="daySelect" className="form-label">
-            Select a Day:
-          </label>
-          <select
-            className="form-select"
-            id="daySelect"
-            value={selectedDay}
-            onChange={handleDayChange}
-          >
-            <option value="">-- Select Day --</option>
-            <option value="Monday">Monday</option>
-            <option value="Tuesday">Tuesday</option>
-            <option value="Wednesday">Wednesday</option>
-            <option value="Thursday">Thursday</option>
-            <option value="Friday">Friday</option>
-            <option value="Saturday">Saturday</option>
-            <option value="Sunday">Sunday</option>
-          </select>
-        </div>
-        {selectedDay && (
-          <div>
+    <div className="workout-container">
+      <div className="wk-container">
+        <div>
+          <h2>Weekly Workout Program</h2>
+          <form>
             <div className="mb-3">
-              <label htmlFor="workoutInput" className="form-label">
-                Workout:
+              <label htmlFor="daySelect" className="form-label">
+                Select a Day:
+              </label>
+              <select
+                className="form-select"
+                id="daySelect"
+                value={selectedDay}
+                onChange={handleDayChange}
+              >
+                <option value="">-- Select Day --</option>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+                <option value="Sunday">Sunday</option>
+              </select>
+            </div>
+            {selectedDay && (
+              <div>
+                <div className="mb-3">
+                  <label htmlFor="workoutInput" className="form-label">
+                    Workout:
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="workoutInput"
+                    value={workout}
+                    autoComplete="off"
+                    onChange={handleWorkoutChange}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="setsInput" className="form-label">
+                    Sets:
+                  </label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    id="setsInput"
+                    autoComplete="off"
+                    value={sets}
+                    onChange={handleSetsChange}
+                  />
+                </div>
+                {renderSetInputs()}
+                <button
+                  type="button"
+                  className="btn btn-primary mt-3"
+                  onClick={handleAddWorkout}
+                >
+                  Add Workout
+                </button>
+              </div>
+            )}
+          </form>
+        </div>
+        {workoutProgram.length > 0 && (
+          <div className="mt-4">
+            <table className="wk-table table">
+              <thead>
+                <tr>
+                  <th>Day</th>
+                  <th>Workout</th>
+                  <th>Sets</th>
+                  <th>Weights</th>
+                  <th>Reps</th>
+                </tr>
+              </thead>
+              <tbody>
+                {workoutProgram.map((day, index) => (
+                  <tr key={index}>
+                    <td>{day.day}</td>
+                    <td>
+                      {day.workouts.map((workout, workoutIndex) => (
+                        <div key={workoutIndex}>{workout.workout}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {day.workouts.map((workout, workoutIndex) => (
+                        <div key={workoutIndex}>{workout.sets}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {day.workouts.map((workout, workoutIndex) => (
+                        <div key={workoutIndex}>
+                          {workout.weights.map((weight, weightIndex) => (
+                            <React.Fragment key={weightIndex}>
+                              {weight}
+                              <br />
+                            </React.Fragment>
+                          ))}
+                        </div>
+                      ))}
+                    </td>
+                    <td>
+                      {day.workouts.map((workout, workoutIndex) => (
+                        <div key={workoutIndex}>
+                          {workout.reps.map((rep, repIndex) => (
+                            <React.Fragment key={repIndex}>
+                              {rep}
+                              <br />
+                            </React.Fragment>
+                          ))}
+                        </div>
+                      ))}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="mb-3">
+              <label htmlFor="workoutNameInput" className="form-label">
+                Workout Name:
               </label>
               <input
                 type="text"
                 className="form-control"
-                id="workoutInput"
-                value={workout}
-                onChange={handleWorkoutChange}
+                id="workoutNameInput"
+                value={workoutName}
+                onChange={(e) => setWorkoutName(e.target.value)}
               />
             </div>
-            <div className="mb-3">
-              <label htmlFor="setsInput" className="form-label">
-                Sets:
-              </label>
-              <input
-                type="number"
-                className="form-control"
-                id="setsInput"
-                value={sets}
-                onChange={handleSetsChange}
-              />
-            </div>
-            {renderSetInputs()}
             <button
               type="button"
               className="btn btn-primary mt-3"
-              onClick={handleAddWorkout}
+              onClick={handleSaveWorkout}
             >
-              Add Workout
+              Save Workout
             </button>
           </div>
         )}
-      </form>
-      {workoutProgram.length > 0 && (
-        <div className="mt-4">
-          <h4>Weekly Workout Program</h4>
-          <table className="table table-striped">
-            <thead>
-              <tr>
-                <th>Day</th>
-                <th>Workout</th>
-                <th>Sets</th>
-                <th>Weights</th>
-                <th>Reps</th>
-              </tr>
-            </thead>
-            <tbody>
-              {workoutProgram.map((day, index) => (
-                <tr key={index}>
-                  <td>{day.day}</td>
-                  <td>
-                    {day.workouts.map((workout, workoutIndex) => (
-                      <div key={workoutIndex}>{workout.workout}</div>
-                    ))}
-                  </td>
-                  <td>
-                    {day.workouts.map((workout, workoutIndex) => (
-                      <div key={workoutIndex}>{workout.sets}</div>
-                    ))}
-                  </td>
-                  <td>
-                    {day.workouts.map((workout, workoutIndex) => (
-                      <div key={workoutIndex}>
-    {workout.weights.map((weight, weightIndex) => (
-      <React.Fragment key={weightIndex}>
-        {weight}
-        <br />
-      </React.Fragment>
-    ))}
-  </div>
-                    ))}
-                  </td>
-                  <td>
-                    {day.workouts.map((workout, workoutIndex) => (
-                      <div key={workoutIndex}>
-                      {workout.reps.map((rep, repIndex) => (
-                        <React.Fragment key={repIndex}>
-                          {rep}
-                          <br />
-                        </React.Fragment>
-                      ))}
-                    </div>
-                    ))}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <div className="mb-3">
-            <label htmlFor="workoutNameInput" className="form-label">
-              Workout Name:
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="workoutNameInput"
-              value={workoutName}
-              onChange={(e) => setWorkoutName(e.target.value)}
-            />
-          </div>
-          <button
-            type="button"
-            className="btn btn-primary mt-3"
-            onClick={handleSaveWorkout}
-          >
-            Save Workout
-          </button>
-        </div>
-      )}
+      </div>
     </div>
   );
 }
