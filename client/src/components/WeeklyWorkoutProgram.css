@@ -20,6 +20,14 @@
   justify-content: space-around;
 }
 
+@media only screen and (max-device-width: 480px) {
+  .wk-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+}
+
 .wk-container h2,
 label {
   color: white;
@@ -54,4 +62,16 @@ label {
 td,
 tr {
   border: 1px solid white;
+}
+
+.setLabel {
+  color: white;
+  text-align: center;
+}
+
+.rep-set-card {
+  border: 1px solid white;
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: 2px 4px 6px rgb(254, 252, 252);
 }

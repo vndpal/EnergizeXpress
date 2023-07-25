@@ -145,8 +145,8 @@ function WeeklyWorkoutProgram() {
 
     for (let i = 0; i < sets; i++) {
       setInputs.push(
-        <div key={i} className="mt-3">
-          <div>Set {i + 1}</div>
+        <div key={i} className="rep-set-card mt-5">
+          <div className="setLabel">Set {i + 1}</div>
           <div className="mb-2">
             <label htmlFor={`weightInput${i}`} className="form-label">
               Weight (lbs):
@@ -258,6 +258,48 @@ function WeeklyWorkoutProgram() {
               </thead>
               <tbody>
                 {workoutProgram.map((day, index) => (
+                  <React.Fragment key={index}>
+                    {day.workouts.map((workout, workoutIndex) => (
+                      <tr key={`${index}-${workoutIndex}`}>
+                        {workoutIndex === 0 ? (
+                          <td rowSpan={day.workouts.length}>{day.day}</td>
+                        ) : null}
+                        <td>{workout.workout}</td>
+                        <td>{workout.sets}</td>
+                        <td>
+                          {workout.weights.map((weight, weightIndex) => (
+                            <React.Fragment key={weightIndex}>
+                              {weight}
+                              <br />
+                            </React.Fragment>
+                          ))}
+                        </td>
+                        <td>
+                          {workout.reps.map((rep, repIndex) => (
+                            <React.Fragment key={repIndex}>
+                              {rep}
+                              <br />
+                            </React.Fragment>
+                          ))}
+                        </td>
+                      </tr>
+                    ))}
+                  </React.Fragment>
+                ))}
+              </tbody>
+            </table>
+            {/* <table className="wk-table table">
+              <thead>
+                <tr>
+                  <th>Day</th>
+                  <th>Workout</th>
+                  <th>Sets</th>
+                  <th>Weights</th>
+                  <th>Reps</th>
+                </tr>
+              </thead>
+              <tbody>
+                {workoutProgram.map((day, index) => (
                   <tr key={index}>
                     <td>{day.day}</td>
                     <td>
@@ -297,7 +339,7 @@ function WeeklyWorkoutProgram() {
                   </tr>
                 ))}
               </tbody>
-            </table>
+            </table> */}
             <div className="mb-3">
               <label htmlFor="workoutNameInput" className="form-label">
                 Workout Name:
