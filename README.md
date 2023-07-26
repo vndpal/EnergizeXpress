@@ -51,3 +51,9 @@ Here is what you need to be able to run Cal.com.
    ```sh
    yarn
    ```
+
+1. Run the project with
+
+   ```sh
+   yarn start
+   ```
