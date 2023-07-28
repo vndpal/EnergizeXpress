@@ -33,7 +33,6 @@
 .card-title {
   margin: 0.5rem 5%;
 }
-
 .card-submit-button {
   text-align: center;
   width: 90%;
@@ -77,6 +76,7 @@
   top: 0;
   left: 0;
   width: 100%;
+  z-index: 10;
 }
 
 .form-group {
