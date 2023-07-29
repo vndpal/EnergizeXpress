@@ -30,27 +30,52 @@ const Navbar = (props) => {
           <ul className="navbar-nav">
             <li className="nav-item active">
               <NavLink className="nav-link" to="/">
-                Home
+                <span
+                  data-toggle="collapse"
+                  data-target="#navbarSupportedContent"
+                >
+                  Home
+                </span>
               </NavLink>
             </li>
             <li className="nav-item active">
               <NavLink className="nav-link" to="/register">
-                Register
+                <span
+                  data-toggle="collapse"
+                  data-target="#navbarSupportedContent"
+                >
+                  Register
+                </span>
               </NavLink>
             </li>
             <li className="nav-item active">
               <NavLink className="nav-link" to="/aboutus">
-                About Us
+                <span
+                  data-toggle="collapse"
+                  data-target="#navbarSupportedContent"
+                >
+                  About Us
+                </span>
               </NavLink>
             </li>
             <li className="nav-item active">
               <NavLink className="nav-link" to="/contactus">
-                Contact us
+                <span
+                  data-toggle="collapse"
+                  data-target="#navbarSupportedContent"
+                >
+                  Contact us
+                </span>
               </NavLink>
             </li>
             <li className="nav-item active">
               <NavLink className="nav-link" to="/weight">
-                Log weight
+                <span
+                  data-toggle="collapse"
+                  data-target="#navbarSupportedContent"
+                >
+                  Log weight
+                </span>
               </NavLink>
             </li>
             {/* <li className="nav-item active">
@@ -58,7 +83,12 @@ const Navbar = (props) => {
       </li> */}
             <li className="nav-item active">
               <NavLink className="nav-link" to="/program">
-                Workout Program
+                <span
+                  data-toggle="collapse"
+                  data-target="#navbarSupportedContent"
+                >
+                  Workout Program
+                </span>
               </NavLink>
             </li>
           </ul>
