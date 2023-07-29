@@ -8,12 +8,16 @@ input {
   font-family: "Montserrat", sans-serif;
 }
 
+:root {
+  --panel-color: black;
+}
+
 .login-container {
   position: relative;
   top: 50px;
   width: 100%;
   background-color: #fff;
-  min-height: 90vh;
+  min-height: 95vh;
   overflow: hidden;
 }
 
@@ -126,13 +130,13 @@ form.sign-in-form {
 }
 
 .social-icon:hover {
-  color: #f86f03;
-  border-color: #f86f03;
+  color: var(--panel-color);
+  border-color: var(--panel-color);
 }
 
 .login-container .btn {
   width: 150px;
-  background-color: #f86f03;
+  background-color: var(--panel-color);
   border: none;
   outline: none;
   height: 49px;
@@ -166,7 +170,11 @@ form.sign-in-form {
   top: -10%;
   right: 48%;
   transform: translateY(-50%);
-  background-image: linear-gradient(-45deg, #f86f03 0%, #ffa41b 100%);
+  background-image: linear-gradient(
+    -45deg,
+    var(--panel-color) 0%,
+    #ffa41b 100%
+  );
   transition: 1.8s ease-in-out;
   border-radius: 50%;
   z-index: 6;
@@ -271,7 +279,7 @@ form.sign-in-form {
 @media (max-width: 870px) {
   .login-container {
     min-height: 800px;
-    height: 90vh;
+    height: 95vh;
   }
   .signin-signup {
     width: 100%;
