@@ -40,6 +40,8 @@ Here is what you need to be able to run Cal.com.
    ```git clone -c core.symlinks=true https://github.com/VNDPAL/EnergizeXpress.git``` <br>
    See [docs](https://cal.com/docs/how-to-guides/how-to-troubleshoot-symbolic-link-issues-on-windows#enable-symbolic-links) for more details.
 
+1. Create a new file ```.env``` and copy all the contents from ```dev.env``` file. Replace with your database url and secrect key.
+
 1. Go to the project folder
 
    ```sh
